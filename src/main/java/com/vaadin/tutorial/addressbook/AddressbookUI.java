@@ -32,7 +32,7 @@ import com.vaadin.ui.VerticalLayout;
 @Title("Addressbook")
 @Theme("valo")
 public class AddressbookUI extends UI {
-
+	
 	/* User interface components are stored in session. */
 	private Table contactList = new Table();
 	private TextField searchField = new TextField();
