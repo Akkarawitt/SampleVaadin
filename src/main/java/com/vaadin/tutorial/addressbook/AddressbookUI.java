@@ -32,7 +32,7 @@ import com.vaadin.ui.VerticalLayout;
 @Title("Addressbook")
 @Theme("valo")
 public class AddressbookUI extends UI {
-	
+
 	/* User interface components are stored in session. */
 	private Table contactList = new Table();
 	private TextField searchField = new TextField();
@@ -43,10 +43,9 @@ public class AddressbookUI extends UI {
 
 	private static final String FNAME = "First Name";
 	private static final String LNAME = "Last Name";
-	private static final String COMPANY = "Company";
+	private static final String MPHONE = "Mobile Phone";
 	private static final String[] fieldNames = new String[] { FNAME, LNAME,
-			COMPANY, "Mobile Phone", "Work Phone", "Home Phone", "Work Email",
-			"Home Email", "Street", "City", "Zip", "State", "Country" };
+		MPHONE };
 
 	/*
 	 * Any component can be bound to an external data source. This example uses
@@ -186,7 +185,7 @@ public class AddressbookUI extends UI {
 		public boolean passesFilter(Object itemId, Item item) {
 			String haystack = ("" + item.getItemProperty(FNAME).getValue()
 					+ item.getItemProperty(LNAME).getValue() + item
-					.getItemProperty(COMPANY).getValue()).toLowerCase();
+					.getItemProperty(MPHONE).getValue()).toLowerCase();
 			return haystack.contains(needle);
 		}
 
@@ -230,7 +229,7 @@ public class AddressbookUI extends UI {
 
 	private void initContactList() {
 		contactList.setContainerDataSource(contactContainer);
-		contactList.setVisibleColumns(new String[] { FNAME, LNAME, COMPANY });
+		contactList.setVisibleColumns(new String[] { FNAME, LNAME, MPHONE });
 		contactList.setSelectable(true);
 		contactList.setImmediate(true);
 
@@ -263,21 +262,6 @@ public class AddressbookUI extends UI {
 
 		for (String p : fieldNames) {
 			ic.addContainerProperty(p, String.class, "");
-		}
-
-		/* Create dummy data by randomly combining first and last names */
-		String[] fnames = { "Peter", "Alice", "Joshua", "Mike", "Olivia",
-				"Nina", "Alex", "Rita", "Dan", "Umberto", "Henrik", "Rene",
-				"Lisa", "Marge" };
-		String[] lnames = { "Smith", "Gordon", "Simpson", "Brown", "Clavel",
-				"Simons", "Verne", "Scott", "Allison", "Gates", "Rowling",
-				"Barks", "Ross", "Schneider", "Tate" };
-		for (int i = 0; i < 1000; i++) {
-			Object id = ic.addItem();
-			ic.getContainerProperty(id, FNAME).setValue(
-					fnames[(int) (fnames.length * Math.random())]);
-			ic.getContainerProperty(id, LNAME).setValue(
-					lnames[(int) (lnames.length * Math.random())]);
 		}
 
 		return ic;
